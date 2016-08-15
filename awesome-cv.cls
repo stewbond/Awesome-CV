@@ -78,7 +78,7 @@
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink
-\RequirePackage[hidelinks,unicode]{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 \hypersetup{%
   pdftitle={},
   pdfauthor={},
@@ -540,8 +540,12 @@
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+      {
+        \ifempty{#1#4}
+        {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\}
+        {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+         \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+      }
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
 }
